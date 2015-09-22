@@ -12,8 +12,8 @@ namespace TransactionalEmail.Infrastructure.Data.Migrations
                 c => new
                     {
                         EmailId = c.Int(nullable: false, identity: true),
-                        EmailReference = c.String(),
-                        AccountName = c.String(),
+                        EmailReference = c.String(maxLength: 25),
+                        AccountName = c.String(maxLength: 255),
                         EmailUid = c.Long(),
                         Subject = c.String(),
                         PlainTextBody = c.String(),
@@ -29,7 +29,7 @@ namespace TransactionalEmail.Infrastructure.Data.Migrations
                 c => new
                     {
                         AppliedRuleId = c.Int(nullable: false, identity: true),
-                        RuleName = c.String(),
+                        RuleName = c.String(maxLength: 255),
                         Email_EmailId = c.Int(),
                     })
                 .PrimaryKey(t => t.AppliedRuleId)
@@ -41,8 +41,8 @@ namespace TransactionalEmail.Infrastructure.Data.Migrations
                 c => new
                     {
                         AttachmentId = c.String(nullable: false, maxLength: 128),
-                        AttachmentName = c.String(),
-                        MimeType = c.String(),
+                        AttachmentName = c.String(maxLength: 255),
+                        MimeType = c.String(maxLength: 255),
                         ByteArray = c.Binary(),
                         Email_EmailId = c.Int(),
                     })
@@ -55,8 +55,8 @@ namespace TransactionalEmail.Infrastructure.Data.Migrations
                 c => new
                     {
                         EmailAddressId = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Email = c.String(),
+                        Name = c.String(maxLength: 50),
+                        Email = c.String(maxLength: 255),
                         Type = c.Int(nullable: false),
                         Email_EmailId = c.Int(),
                     })

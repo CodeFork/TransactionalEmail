@@ -52,6 +52,38 @@ namespace TransactionalEmail.Infrastructure.Data
 
             modelBuilder.Entity<Email>()
                 .Ignore(x => x.Bccs);
+
+            //email
+            modelBuilder.Entity<Email>()
+                .Property(x => x.EmailReference)
+                .HasMaxLength(25);
+
+            modelBuilder.Entity<Email>()
+                .Property(x => x.AccountName)
+                .HasMaxLength(255);
+
+            //email address
+            modelBuilder.Entity<EmailAddress>()
+                .Property(x => x.Name)
+                .HasMaxLength(50);
+
+            modelBuilder.Entity<EmailAddress>()
+                .Property(x => x.Email)
+                .HasMaxLength(255);
+
+            //attachments
+            modelBuilder.Entity<Attachment>()
+                .Property(x => x.AttachmentName)
+                .HasMaxLength(255);
+
+            modelBuilder.Entity<Attachment>()
+                .Property(x => x.MimeType)
+                .HasMaxLength(255);
+
+            //rules
+            modelBuilder.Entity<AppliedRule>()
+                .Property(x => x.RuleName)
+                .HasMaxLength(255);
         }
     }
 }
