@@ -21,6 +21,7 @@ namespace TransactionalEmail.Core.Objects
         public Direction Direction { get; set; }
         public List<AppliedRule> AppliedRules { get; set; } 
         public Status Status { get; set; }
+        public DateTime DateCreated { get; set; }
 
         public Email()
         {
@@ -36,6 +37,7 @@ namespace TransactionalEmail.Core.Objects
             Direction = Direction.Unknown;
             AppliedRules = new List<AppliedRule>();
             Status = Status.Unknown;
+            DateCreated = DateTime.UtcNow;
         }
 
         public Email CreateReference(IReferenceGenerator referenceGenerator)

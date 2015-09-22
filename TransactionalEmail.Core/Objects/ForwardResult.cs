@@ -1,8 +1,10 @@
-﻿namespace TransactionalEmail.Core.Objects
+﻿using System;
+
+namespace TransactionalEmail.Core.Objects
 {
     public class ForwardResult
     {
         public string RuleApplied { get; set; }
-        public Email EmailResult { get; set; }       
+        public Email EmailResult { get; set; }
     }
 }

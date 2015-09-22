@@ -21,6 +21,7 @@ namespace TransactionalEmail.Infrastructure.Data.Migrations
                         Date = c.DateTime(),
                         Direction = c.Int(nullable: false),
                         Status = c.Int(nullable: false),
+                        DateCreated = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.EmailId);
             
@@ -30,6 +31,7 @@ namespace TransactionalEmail.Infrastructure.Data.Migrations
                     {
                         AppliedRuleId = c.Int(nullable: false, identity: true),
                         RuleName = c.String(maxLength: 255),
+                        DateCreated = c.DateTime(nullable: false),
                         Email_EmailId = c.Int(),
                     })
                 .PrimaryKey(t => t.AppliedRuleId)
@@ -44,6 +46,7 @@ namespace TransactionalEmail.Infrastructure.Data.Migrations
                         AttachmentName = c.String(maxLength: 255),
                         MimeType = c.String(maxLength: 255),
                         ByteArray = c.Binary(),
+                        DateCreated = c.DateTime(nullable: false),
                         Email_EmailId = c.Int(),
                     })
                 .PrimaryKey(t => t.AttachmentId)
@@ -58,6 +61,7 @@ namespace TransactionalEmail.Infrastructure.Data.Migrations
                         Name = c.String(maxLength: 50),
                         Email = c.String(maxLength: 255),
                         Type = c.Int(nullable: false),
+                        DateCreated = c.DateTime(nullable: false),
                         Email_EmailId = c.Int(),
                     })
                 .PrimaryKey(t => t.EmailAddressId)
