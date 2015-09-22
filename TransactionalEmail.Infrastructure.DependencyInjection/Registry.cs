@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
 using SimpleInjector;
 using SimpleInjector.Packaging;
 using TransactionalEmail.Core.Interfaces;
@@ -48,6 +47,7 @@ namespace TransactionalEmail.Infrastructure.DependencyInjection
             container.Register<IMailboxConfiguration>(() => (MailboxConfigurationSettings)(dynamic)ConfigurationManager.GetSection("mailboxConfigurations"));
             container.Register<IMailboxLabels>(() => (MailboxLabelSettings)(dynamic)ConfigurationManager.GetSection("mailboxLabelSettings"));
             container.Register<IGmailSettings>(() => (GmailSettings)(dynamic)ConfigurationManager.GetSection("gmailSettings"));
+            container.Register<IEmailServiceSettings>(() => (EmailServiceSettings)(dynamic)ConfigurationManager.GetSection("emailServiceSettings"));
 
             container.Verify();
         }

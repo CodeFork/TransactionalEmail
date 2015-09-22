@@ -14,24 +14,28 @@ namespace TransactionalEmail.Core.Services
         private readonly IEmailProvider _emailProvider;
         private readonly IEmailRepository _emailRepository;
         private readonly IReferenceGenerator _referenceGenerator;
+        private readonly IEmailServiceSettings _emailServiceSettings;
 
         public EmailService(IMailboxConfiguration mailboxConfiguration, 
                             IForwardService forwardService,
                             IEmailProvider emailProvider, 
                             IEmailRepository emailRepository, 
-                            IReferenceGenerator referenceGenerator)
+                            IReferenceGenerator referenceGenerator, 
+                            IEmailServiceSettings emailServiceSettings)
         {
             Check.If(mailboxConfiguration).IsNotNull();
             Check.If(forwardService).IsNotNull();
             Check.If(emailProvider).IsNotNull();
             Check.If(emailRepository).IsNotNull();
             Check.If(referenceGenerator).IsNotNull();
+            Check.If(emailServiceSettings).IsNotNull();
 
             _mailboxConfiguration = mailboxConfiguration;
             _forwardService = forwardService;
             _emailProvider = emailProvider;
             _emailRepository = emailRepository;
             _referenceGenerator = referenceGenerator;
+            _emailServiceSettings = emailServiceSettings;
         }
 
         public List<Email> RetrieveMessages(int numberOfEmailsToRetrieve)
@@ -65,7 +69,10 @@ namespace TransactionalEmail.Core.Services
                 return false;
 
             _emailRepository.CreateEmail(email.CreateReference(_referenceGenerator).SetDirection(Direction.Outbound).SetAccountName(config.AccountName));
-            
+
+            if (!_emailServiceSettings.SendEnabled)
+                return true;
+
             var result = _emailProvider.SendEmail(config, email);
 
             _emailRepository.UpdateStatus(email.EmailReference, result ? Status.Success : Status.Error);

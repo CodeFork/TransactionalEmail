@@ -16,12 +16,42 @@ namespace TransactionalEmail.Infrastructure.Data
             Configuration.LazyLoadingEnabled = false;
         }
 
-        public EmailContext() 
+        public EmailContext()
             : base(Constants.DefaultDatabaseName)
         {
             Configuration.LazyLoadingEnabled = false;
         }
 
         public DbSet<Email> Emails { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Email>()
+                .HasMany(e => e.EmailAddresses)
+                .WithOptional()
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Email>()
+                .HasMany(a => a.Attachments)
+                .WithOptional()
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Email>()
+                .HasMany(r => r.AppliedRules)
+                .WithOptional()
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Email>()
+                .Ignore(x => x.FromAddress);
+
+            modelBuilder.Entity<Email>()
+                .Ignore(x => x.ToAddresses);
+
+            modelBuilder.Entity<Email>()
+                .Ignore(x => x.Ccs);
+
+            modelBuilder.Entity<Email>()
+                .Ignore(x => x.Bccs);
+        }
     }
 }

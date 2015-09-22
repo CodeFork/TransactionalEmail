@@ -52,6 +52,7 @@
     <Compile Include="Interfaces\IEmailAddressValidator.cs" />
     <Compile Include="Interfaces\IEmailProvider.cs" />
     <Compile Include="Interfaces\IEmailRepository.cs" />
+    <Compile Include="Interfaces\IEmailServiceSettings.cs" />
     <Compile Include="Interfaces\IForwardingRule.cs" />
     <Compile Include="Interfaces\IForwardingRuleFactory.cs" />
     <Compile Include="Interfaces\IMailboxLabels.cs" />

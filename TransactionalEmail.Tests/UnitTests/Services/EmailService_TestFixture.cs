@@ -14,6 +14,7 @@ namespace TransactionalEmail.Tests.UnitTests.Services
     public class EmailService_TestFixture
     {
         private const string Reference = "ABCDE12345";
+        private Mock<IEmailServiceSettings> _mockEmailServiceSettings;
         private Mock<IMailboxConfiguration> _mockConfiguration;
         private Mock<IReferenceGenerator> _mockReferenceGenerator;
         private Mock<IEmailRepository> _mockRepository;
@@ -24,6 +25,7 @@ namespace TransactionalEmail.Tests.UnitTests.Services
         [SetUp]
         public void Setup()
         {
+            _mockEmailServiceSettings = new Mock<IEmailServiceSettings>();
             _mockConfiguration = new Mock<IMailboxConfiguration>();
             _mockReferenceGenerator = new Mock<IReferenceGenerator>();
             _mockRepository = new Mock<IEmailRepository>();
@@ -34,7 +36,8 @@ namespace TransactionalEmail.Tests.UnitTests.Services
                                                 _mockForwardService.Object,
                                                 _mockEmailProvider.Object, 
                                                 _mockRepository.Object, 
-                                                _mockReferenceGenerator.Object);
+                                                _mockReferenceGenerator.Object,
+                                                _mockEmailServiceSettings.Object);
         }
 
         [Test]
@@ -155,6 +158,8 @@ namespace TransactionalEmail.Tests.UnitTests.Services
         public void Send_Email_Calls_Email_Provider_Send_Method()
         {
             //arrange
+            _mockEmailServiceSettings.Setup(x => x.SendEnabled).Returns(true);
+
             _mockRepository.Setup(x => x.CreateEmail(It.IsAny<Email>()))
                 .Returns(true);
 
@@ -177,6 +182,8 @@ namespace TransactionalEmail.Tests.UnitTests.Services
         public void Send_Email_Calls_Repository_Update_Status_Method()
         {
             //arrange
+            _mockEmailServiceSettings.Setup(x => x.SendEnabled).Returns(true);
+
             _mockRepository.Setup(x => x.CreateEmail(It.IsAny<Email>()))
                 .Returns(true);
 

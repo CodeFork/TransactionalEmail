@@ -52,6 +52,7 @@
     <Compile Include="CryptographicReferenceGenerator.cs" />
     <Compile Include="DbSettings.cs" />
     <Compile Include="EmailAddressValidator.cs" />
+    <Compile Include="EmailServiceSettings.cs" />
     <Compile Include="MailboxConfigurationSettings.cs" />
     <Compile Include="MailboxLabelSettings.cs" />
     <Compile Include="MailboxSettings.cs" />

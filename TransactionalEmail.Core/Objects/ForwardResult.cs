@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace TransactionalEmail.Core.Objects
+﻿namespace TransactionalEmail.Core.Objects
 {
     public class ForwardResult
     {
