@@ -60,6 +60,11 @@
     <Compile Include="EmailContext.cs" />
     <Compile Include="EmailRepository.cs" />
     <Compile Include="IEmailContext.cs" />
+    <Compile Include="Migrations\201509221556337_Initial Database.cs" />
+    <Compile Include="Migrations\201509221556337_Initial Database.Designer.cs">
+      <DependentUpon>201509221556337_Initial Database.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -71,6 +76,11 @@
       <Project>{52CDD3BF-AE80-4EE6-90F6-3BEC426FF7AD}</Project>
       <Name>TransactionalEmail.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201509221556337_Initial Database.resx">
+      <DependentUpon>201509221556337_Initial Database.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
