@@ -99,7 +99,7 @@ namespace TransactionalEmail.Infrastructure.Gmail
 
                     return client.SendMessage(EmailMapper.MapToIMail(email)).Status == SendMessageStatus.Success;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     return false;
                 }
