@@ -51,5 +51,21 @@ namespace TransactionalEmail.Tests.UnitTests.Extensions
             result.First().Name.Should().Be("Kristian Wilson");
             result.First().Email.Should().Be("kristian.wilson@gmail.com");
         }
+
+        [Test]
+        public void If_String_Includes_No_Name_Returns_Email_With_Email_Address_Only()
+        {
+            //Arrange
+            const string testString = "<kristian.wilson@gmail.com>";
+
+            //Act
+            var result = testString.ToEmailAddressList(EmailAddressType.From);
+
+            //Assert
+            result.Should().NotBeEmpty();
+            result.Count().Should().Be(1);
+            result.First().Name.Should().Be(string.Empty);
+            result.First().Email.Should().Be("kristian.wilson@gmail.com");
+        }
     }
 }

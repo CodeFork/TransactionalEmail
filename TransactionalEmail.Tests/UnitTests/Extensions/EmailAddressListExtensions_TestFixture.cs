@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using FluentAssertions;
-using Moq;
 using NUnit.Framework;
 using TransactionalEmail.Core.Objects;
 using TransactionalEmail.Extensions;
@@ -24,6 +21,19 @@ namespace TransactionalEmail.Tests.UnitTests.Extensions
 
             //Assert
             result.Should().Be("Kristian Wilson <kristian.wilson@gmail.com>");
+        }
+
+        [Test]
+        public void Can_Convert_Email_Address_With_No_Name_To_String()
+        {
+            //Arrange
+            var email = new EmailAddress { Email = "kristian.wilson@gmail.com" };
+
+            //Act
+            var result = email.ToAddressString();
+
+            //Assert
+            result.Should().Be("<kristian.wilson@gmail.com>");
         }
 
         [Test]

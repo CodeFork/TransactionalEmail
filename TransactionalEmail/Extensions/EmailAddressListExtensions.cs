@@ -34,7 +34,10 @@ namespace TransactionalEmail.Extensions
 
         public static string ToAddressString(this EmailAddress emailAddress)
         {
-            return emailAddress.IsNull() ? string.Empty : $"{emailAddress.Name} <{emailAddress.Email}>";
+            var seperator = string.IsNullOrEmpty(emailAddress.Name) ? string.Empty : " "; //we only want a space if both parts are present
+
+
+            return emailAddress.IsNull() ? string.Empty : $"{emailAddress.Name}{seperator}<{emailAddress.Email}>";
         }
     }
 }
