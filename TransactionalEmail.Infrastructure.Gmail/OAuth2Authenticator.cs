@@ -26,7 +26,9 @@ namespace TransactionalEmail.Infrastructure.Gmail
             var certPath = HttpContext.Current.Server.MapPath(_gmailSettings.ServiceAccountCertPath);
 
             var certificate = new X509Certificate2(certPath,
-                _gmailSettings.ServiceAccountCertPassword, X509KeyStorageFlags.Exportable);
+                _gmailSettings.ServiceAccountCertPassword, X509KeyStorageFlags.MachineKeySet |
+                                                           X509KeyStorageFlags.PersistKeySet |
+                                                           X509KeyStorageFlags.Exportable);
 
             var credential = new ServiceAccountCredential(
 
