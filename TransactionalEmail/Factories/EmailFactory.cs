@@ -44,6 +44,7 @@ namespace TransactionalEmail.Factories
                 Subject = email.Subject,
                 PlainTextBody = email.PlainTextBody,
                 HtmlBody = email.HtmlBody,
+                EmailDate = email.Date,
                 Attachments = Mapper.Map<List<Core.Objects.Attachment>, List<Attachment>>(email.Attachments)
             };
         }

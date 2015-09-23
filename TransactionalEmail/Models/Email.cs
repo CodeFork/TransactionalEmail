@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TransactionalEmail.Models
 {
@@ -13,5 +14,6 @@ namespace TransactionalEmail.Models
         public string PlainTextBody { get; set; }
         public string HtmlBody { get; set; }
         public List<Attachment> Attachments { get; set; }  
+        public DateTime? EmailDate { get; set; }
     }
 }

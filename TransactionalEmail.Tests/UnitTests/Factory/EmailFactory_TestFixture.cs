@@ -70,6 +70,8 @@ namespace TransactionalEmail.Tests.UnitTests.Factory
         public void CreateEmailModel_Email_Returns_EmailModel()
         {
             //Arrange
+            var timestamp = DateTime.UtcNow;
+
             var email = new Core.Objects.Email
             {
                 EmailAddresses =
@@ -85,6 +87,7 @@ namespace TransactionalEmail.Tests.UnitTests.Factory
                 Subject = "Test Subject",
                 PlainTextBody = "Plain Text",
                 HtmlBody = "Html Body",
+                Date = timestamp,
                 Attachments =
                     new List<Core.Objects.Attachment>
                     {
@@ -100,6 +103,7 @@ namespace TransactionalEmail.Tests.UnitTests.Factory
             result.Subject.Should().Be(email.Subject);
             result.PlainTextBody.Should().Be(email.PlainTextBody);
             result.HtmlBody.Should().Be(email.HtmlBody);
+            result.EmailDate.Should().Be(timestamp);
             result.Attachments.Should().NotBeEmpty();
             result.Attachments.Count().Should().Be(1);
             result.Attachments.First().AttachmentName.Should().Be("Test");
