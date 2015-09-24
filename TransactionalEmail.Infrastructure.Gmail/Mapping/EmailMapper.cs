@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Limilabs.Mail;
 using Limilabs.Mail.Headers;
@@ -20,7 +21,7 @@ namespace TransactionalEmail.Infrastructure.Gmail.Mapping
                 Subject = email.Subject,
                 HtmlBody = email.GetBodyAsHtml(),
                 PlainTextBody = email.GetBodyAsText(),
-                Date = email.Date,
+                Date = email.Date?.ToUniversalTime() ?? DateTime.UtcNow,
                 Direction = Direction.Inbound,
                 Status = Status.Unknown,
             };
