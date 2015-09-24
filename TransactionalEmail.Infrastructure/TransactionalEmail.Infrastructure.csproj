@@ -63,8 +63,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TransactionalEmail.Core\TransactionalEmail.Core.csproj">
-      <Project>{52CDD3BF-AE80-4EE6-90F6-3BEC426FF7AD}</Project>
-      <Name>MailboxWatcher.Core</Name>
+      <Project>{52cdd3bf-ae80-4ee6-90f6-3bec426ff7ad}</Project>
+      <Name>TransactionalEmail.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

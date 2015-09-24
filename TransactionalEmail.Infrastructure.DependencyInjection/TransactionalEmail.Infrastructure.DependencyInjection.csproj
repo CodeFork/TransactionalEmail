@@ -96,20 +96,20 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TransactionalEmail.Core\TransactionalEmail.Core.csproj">
-      <Project>{52CDD3BF-AE80-4EE6-90F6-3BEC426FF7AD}</Project>
-      <Name>MailboxWatcher.Core</Name>
+      <Project>{52cdd3bf-ae80-4ee6-90f6-3bec426ff7ad}</Project>
+      <Name>TransactionalEmail.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\TransactionalEmail.Infrastructure.Data\TransactionalEmail.Infrastructure.Data.csproj">
       <Project>{388F8BC6-49AC-4634-AAA2-0D4F82A19F45}</Project>
       <Name>TransactionalEmail.Infrastructure.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\TransactionalEmail.Infrastructure.Gmail\TransactionalEmail.Infrastructure.Gmail.csproj">
-      <Project>{E7F073F9-18D8-420B-BF97-95D618224DB4}</Project>
-      <Name>MailboxWatcher.Infrastructure.Gmail</Name>
+      <Project>{e7f073f9-18d8-420b-bf97-95d618224db4}</Project>
+      <Name>TransactionalEmail.Infrastructure.Gmail</Name>
     </ProjectReference>
     <ProjectReference Include="..\TransactionalEmail.Infrastructure\TransactionalEmail.Infrastructure.csproj">
-      <Project>{2C7CEA62-1095-4AE7-8D6A-73B3A0876EBA}</Project>
-      <Name>MailboxWatcher.Infrastructure</Name>
+      <Project>{2c7cea62-1095-4ae7-8d6a-73b3a0876eba}</Project>
+      <Name>TransactionalEmail.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

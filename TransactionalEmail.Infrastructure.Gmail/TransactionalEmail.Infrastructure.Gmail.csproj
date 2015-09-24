@@ -112,16 +112,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TransactionalEmail.Core\TransactionalEmail.Core.csproj">
-      <Project>{52CDD3BF-AE80-4EE6-90F6-3BEC426FF7AD}</Project>
-      <Name>MailboxWatcher.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\TransactionalEmail.Core\TransactionalEmail.Core.csproj">
+      <Project>{52cdd3bf-ae80-4ee6-90f6-3bec426ff7ad}</Project>
+      <Name>TransactionalEmail.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
