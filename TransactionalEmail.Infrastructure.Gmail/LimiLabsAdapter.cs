@@ -188,7 +188,7 @@ namespace TransactionalEmail.Infrastructure.Gmail
             if (string.IsNullOrEmpty(accessToken))
                 return false;
 
-            imap.LoginOAUTH2(mailboxSettings.AccountName, accessToken);
+            imap.LoginOAUTH2(mailboxSettings.MailboxAddress, accessToken);
 
             imap.SelectInbox();
 
