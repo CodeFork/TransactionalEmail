@@ -22,7 +22,7 @@ namespace TransactionalEmail.Controllers
             _emailService = emailService;
         }
 
-        [HttpGet, Route("")]
+        [HttpGet, Route("{numberOfEmailsToRetrieve:int}")]
         public List<Email> GetEmails(int numberOfEmailsToRetrieve)
         {
             Check.If(numberOfEmailsToRetrieve).IsGreaterThan(0);

@@ -20,7 +20,7 @@ namespace TransactionalEmail.Tests.UnitTests
             {
                 var emailController = ControllerHelper.GetInitialisedEmailController(_mockEmailService.Object);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 Assert.Fail("There is a problem with the attribute based routing configuration");
             }
