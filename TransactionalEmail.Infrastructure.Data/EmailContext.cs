@@ -2,6 +2,7 @@
 using Conditions.Guards;
 using TransactionalEmail.Core.Interfaces;
 using TransactionalEmail.Core.Objects;
+using TransactionalEmail.Infrastructure.Data.Mapping;
 
 namespace TransactionalEmail.Infrastructure.Data
 {
@@ -26,64 +27,17 @@ namespace TransactionalEmail.Infrastructure.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Email>()
-                .HasMany(e => e.EmailAddresses)
-                .WithOptional()
-                .WillCascadeOnDelete(true);
-
-            modelBuilder.Entity<Email>()
-                .HasMany(a => a.Attachments)
-                .WithOptional()
-                .WillCascadeOnDelete(true);
-
-            modelBuilder.Entity<Email>()
-                .HasMany(r => r.AppliedRules)
-                .WithOptional()
-                .WillCascadeOnDelete(true);
-
-            modelBuilder.Entity<Email>()
-                .Ignore(x => x.FromAddress);
-
-            modelBuilder.Entity<Email>()
-                .Ignore(x => x.ToAddresses);
-
-            modelBuilder.Entity<Email>()
-                .Ignore(x => x.Ccs);
-
-            modelBuilder.Entity<Email>()
-                .Ignore(x => x.Bccs);
-
-            //email
-            modelBuilder.Entity<Email>()
-                .Property(x => x.EmailReference)
-                .HasMaxLength(25);
-
-            modelBuilder.Entity<Email>()
-                .Property(x => x.AccountName)
-                .HasMaxLength(255);
+            //Email
+            modelBuilder.Configurations.Add(new EmailMap());
 
             //email address
-            modelBuilder.Entity<EmailAddress>()
-                .Property(x => x.Name)
-                .HasMaxLength(50);
-
-            modelBuilder.Entity<EmailAddress>()
-                .Property(x => x.Email)
-                .HasMaxLength(255);
+            modelBuilder.Configurations.Add(new EmailAddressMap());
 
             //attachments
-            modelBuilder.Entity<Attachment>()
-                .Property(x => x.AttachmentName)
-                .HasMaxLength(255);
-
-            modelBuilder.Entity<Attachment>()
-                .Property(x => x.MimeType)
-                .HasMaxLength(255);
+            modelBuilder.Configurations.Add(new AttachmentMap());
 
             //rules
-            modelBuilder.Entity<AppliedRule>()
-                .Property(x => x.RuleName)
-                .HasMaxLength(255);
+            modelBuilder.Configurations.Add(new AppliedRuleMap());
         }
     }
 }

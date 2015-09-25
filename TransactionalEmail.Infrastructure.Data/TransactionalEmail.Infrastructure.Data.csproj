@@ -60,6 +60,10 @@
     <Compile Include="EmailContext.cs" />
     <Compile Include="EmailRepository.cs" />
     <Compile Include="IEmailContext.cs" />
+    <Compile Include="Mapping\AppliedRuleMap.cs" />
+    <Compile Include="Mapping\AttachmentMap.cs" />
+    <Compile Include="Mapping\EmailAddressMap.cs" />
+    <Compile Include="Mapping\EmailMap.cs" />
     <Compile Include="Migrations\201509221556337_Initial Database.cs" />
     <Compile Include="Migrations\201509221556337_Initial Database.Designer.cs">
       <DependentUpon>201509221556337_Initial Database.cs</DependentUpon>

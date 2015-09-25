@@ -151,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="MailLicense.xml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
