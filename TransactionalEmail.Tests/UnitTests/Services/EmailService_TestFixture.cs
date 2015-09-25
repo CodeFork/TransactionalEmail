@@ -129,7 +129,7 @@ namespace TransactionalEmail.Tests.UnitTests.Services
             var result = _emailService.Send(new Email());
 
             //assert
-            result.Should().BeFalse();
+            result.Should().BeEmpty();
         }
         
         [Test]
@@ -158,6 +158,8 @@ namespace TransactionalEmail.Tests.UnitTests.Services
         public void Send_Email_Calls_Email_Provider_Send_Method()
         {
             //arrange
+            _mockReferenceGenerator.Setup(x => x.CreateReference(It.IsAny<int>())).Returns("ABCD1234");
+
             _mockEmailServiceSettings.Setup(x => x.SendEnabled).Returns(true);
 
             _mockRepository.Setup(x => x.CreateEmail(It.IsAny<Email>()))
@@ -173,7 +175,8 @@ namespace TransactionalEmail.Tests.UnitTests.Services
             var result = _emailService.Send(new Email());
 
             //assert
-            result.Should().BeTrue();
+            result.Should().NotBeEmpty();
+
             _mockEmailProvider.Verify(
                 x => x.SendEmail(It.IsAny<IMailboxSettings>(), It.IsAny<Email>()), Times.Once());
         }

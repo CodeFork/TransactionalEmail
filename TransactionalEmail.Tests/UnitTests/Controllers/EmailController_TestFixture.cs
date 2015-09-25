@@ -65,7 +65,7 @@ namespace TransactionalEmail.Tests.UnitTests.Controllers
         {
             //arrange
             _mockEmailService.ResetCalls();
-            _mockEmailService.Setup(x => x.Send(It.IsAny<Email>())).Returns(true);
+            _mockEmailService.Setup(x => x.Send(It.IsAny<Email>())).Returns("ABCD1234");
 
             //act
             var result = _emailController.Send(new Models.Email());

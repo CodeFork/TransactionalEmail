@@ -61,23 +61,28 @@ namespace TransactionalEmail.Core.Services
             return result;
         }
 
-        public bool Send(Email email)
+        public Email GetEmail(string emailReference)
+        {
+            return _emailRepository.GetEmailByReference(emailReference);
+        }
+
+        public string Send(Email email)
         {
             var config = _mailboxConfiguration.Mailboxes.FirstOrDefault(x => x.Outbound);
 
             if (config.IsNull())
-                return false;
+                return string.Empty;
 
             _emailRepository.CreateEmail(email.CreateReference(_referenceGenerator).SetDirection(Direction.Outbound).SetAccountName(config.AccountName));
 
             if (!_emailServiceSettings.SendEnabled)
-                return true;
+                return email.EmailReference;
 
             var result = _emailProvider.SendEmail(config, email);
 
             _emailRepository.UpdateStatus(email.EmailReference, result ? Status.Success : Status.Error);
 
-            return result;
+            return result ? email.EmailReference : string.Empty;
         }
 
         public bool NotifyRetrievalResult(string emailReference, bool retrieved)

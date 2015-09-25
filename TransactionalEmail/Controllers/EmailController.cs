@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Conditions;
 using Conditions.Guards;
 using TransactionalEmail.Core.Interfaces;
 using TransactionalEmail.Factories;
@@ -30,6 +32,14 @@ namespace TransactionalEmail.Controllers
             return _emailService.RetrieveMessages(numberOfEmailsToRetrieve).Select(EmailFactory.CreateEmailModel).ToList();
         }
 
+        [HttpGet, Route("{emailReference:length(1,10)}", Name = "GetEmail")]
+        public Email GetEmail(string emailReference)
+        {
+            Check.If(emailReference).IsNotNull();
+
+            return EmailFactory.CreateEmailModel(_emailService.GetEmail(emailReference));
+        }
+
         [HttpPost, Route("")]
         public HttpResponseMessage Send(Email email)
         {
@@ -37,9 +47,16 @@ namespace TransactionalEmail.Controllers
 
             var result = _emailService.Send(EmailFactory.CreateCoreEmail(email));
 
-            return result
-                ? new HttpResponseMessage {StatusCode = HttpStatusCode.OK}
-                : new HttpResponseMessage {StatusCode = HttpStatusCode.InternalServerError};
+            if (result.IsNullOrEmpty())
+            {
+                return new HttpResponseMessage { StatusCode = HttpStatusCode.InternalServerError };
+            }
+
+            var response = new HttpResponseMessage { StatusCode = HttpStatusCode.Created };
+
+            response.Headers.Location = new Uri(Url.Link("GetEmail", new { emailReference = result }));
+
+            return response;
         }
 
         [HttpPut, Route("")]
