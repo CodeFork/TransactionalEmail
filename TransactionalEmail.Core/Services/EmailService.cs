@@ -48,7 +48,7 @@ namespace TransactionalEmail.Core.Services
 
                 foreach (var email in emails)
                 {
-                    _emailRepository.CreateEmail(email);
+                    _emailRepository.CreateEmail(email.CreateReference(_referenceGenerator).SetDirection(Direction.Inbound).SetAccountName(mailboxSettings.AccountName));
 
                     var processedEmail = ApplyProcessingRules(mailboxSettings, email);
 
