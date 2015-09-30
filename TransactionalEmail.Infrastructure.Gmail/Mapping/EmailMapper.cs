@@ -122,18 +122,6 @@ namespace TransactionalEmail.Infrastructure.Gmail.Mapping
             return result;
         }
 
-        private static string GetAllEmailAddressesAsString(IEnumerable<MailAddress> addresses)
-        {
-            var mailboxes = new List<MailBox>();
-
-            foreach (var address in addresses)
-            {
-                mailboxes.AddRange(address.GetMailboxes());
-            }
-
-            return string.Join("; ", mailboxes.ConvertAll(x => x.Address).ToArray());
-        }
-
         private static Attachment MapToEmailAttachment(byte[] data, string contentType, string fileName)
         {
             return new Attachment
