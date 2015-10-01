@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\ICertificatePath.cs" />
     <Compile Include="Interfaces\IDbSettings.cs" />
     <Compile Include="Interfaces\IEmailAddressValidator.cs" />
     <Compile Include="Interfaces\IEmailProvider.cs" />

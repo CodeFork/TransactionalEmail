@@ -1,11 +1,9 @@
-﻿using System;
-using System.IO;
-using System.Security.Cryptography.X509Certificates;
+﻿using System.Security.Cryptography.X509Certificates;
 using System.Threading;
-using System.Web;
 using Conditions.Guards;
 using Google.Apis.Auth.OAuth2;
 using Limilabs.Client.Authentication.Google;
+using TransactionalEmail.Core.Interfaces;
 using TransactionalEmail.Infrastructure.Gmail.Interfaces;
 
 namespace TransactionalEmail.Infrastructure.Gmail
@@ -13,6 +11,7 @@ namespace TransactionalEmail.Infrastructure.Gmail
     public class OAuth2Authenticator : IOAuth2Authenticator
     {
         private readonly IGmailSettings _gmailSettings;
+        private readonly ICertificatePath _certificatePath;
 
         public OAuth2Authenticator(IGmailSettings gmailSettings)
         {
@@ -23,9 +22,7 @@ namespace TransactionalEmail.Infrastructure.Gmail
 
         public string GetOAuth2AccessToken(string emailAddress)
         {
-            var certPath = HttpContext.Current.Server.MapPath(_gmailSettings.ServiceAccountCertPath);
-
-            var certificate = new X509Certificate2(certPath,
+            var certificate = new X509Certificate2(_certificatePath.Value,
                 _gmailSettings.ServiceAccountCertPassword, X509KeyStorageFlags.MachineKeySet |
                                                            X509KeyStorageFlags.PersistKeySet |
                                                            X509KeyStorageFlags.Exportable);
