@@ -246,7 +246,7 @@ namespace TransactionalEmail.Tests.UnitTests.Services
         {
             //arrange
             _mockRepository.Setup(x => x.GetEmailByReference(It.IsAny<string>()))
-                .Returns(new Email {AccountName = "TestAccount"});
+                .Returns(new Email {AccountName = "TestAccount", EmailUid = 1234});
 
             _mockConfiguration.Setup(x => x.Mailboxes)
                 .Returns(new List<IMailboxSettings> {new MailboxSettings {AccountName = "TestAccount"}});
@@ -269,7 +269,7 @@ namespace TransactionalEmail.Tests.UnitTests.Services
         {
             //arrange
             _mockRepository.Setup(x => x.GetEmailByReference(It.IsAny<string>()))
-                .Returns(new Email { AccountName = "TestAccount" });
+                .Returns(new Email { AccountName = "TestAccount" , EmailUid =  1234});
 
             _mockConfiguration.Setup(x => x.Mailboxes)
                 .Returns(new List<IMailboxSettings> { new MailboxSettings { AccountName = "TestAccount" } });

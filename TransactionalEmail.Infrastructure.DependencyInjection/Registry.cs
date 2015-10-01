@@ -1,5 +1,5 @@
 ﻿using System.Configuration;
-using System.Web;
+using System.Web.Hosting;
 using SimpleInjector;
 using SimpleInjector.Packaging;
 using TransactionalEmail.Core.Interfaces;
@@ -51,7 +51,7 @@ namespace TransactionalEmail.Infrastructure.DependencyInjection
             container.Register<IEmailServiceSettings>(() => (EmailServiceSettings)(dynamic)ConfigurationManager.GetSection("emailServiceSettings"));
 
             //CertificatePath
-            container.Register<ICertificatePath>(() => new CertificatePath { Value = HttpContext.Current.Server.MapPath(container.GetInstance<IGmailSettings>().ServiceAccountCertPath) });
+            container.Register<ICertificatePath>(() => new CertificatePath { Value = HostingEnvironment.MapPath(container.GetInstance<IGmailSettings>().ServiceAccountCertPath) });
 
             container.Verify();
         }

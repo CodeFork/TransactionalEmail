@@ -13,11 +13,13 @@ namespace TransactionalEmail.Infrastructure.Gmail
         private readonly IGmailSettings _gmailSettings;
         private readonly ICertificatePath _certificatePath;
 
-        public OAuth2Authenticator(IGmailSettings gmailSettings)
+        public OAuth2Authenticator(IGmailSettings gmailSettings, ICertificatePath certificatePath)
         {
             Check.If(gmailSettings).IsNotNull();
+            Check.If(certificatePath).IsNotNull();
 
             _gmailSettings = gmailSettings;
+            _certificatePath = certificatePath;
         }
 
         public string GetOAuth2AccessToken(string emailAddress)
