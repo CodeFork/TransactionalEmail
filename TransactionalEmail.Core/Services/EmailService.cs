@@ -94,12 +94,15 @@ namespace TransactionalEmail.Core.Services
             if (email.IsNull())
                 return false;
 
+            if (email.EmailUid.IsNull())
+                return false;
+
             var mailboxSettings = _mailboxConfiguration.Mailboxes.FirstOrDefault(x => x.AccountName == email.AccountName);
 
             if (mailboxSettings.IsNotNull())
             {
                 result = _emailRepository.UpdateStatus(emailReference, retrieved ? Status.Success : Status.Error);
-                result &= _emailProvider.UpdateEmailRetrievalResult(mailboxSettings, email.EmailId, retrieved);
+                result &= _emailProvider.UpdateEmailRetrievalResult(mailboxSettings, email.EmailUid.Value, retrieved);
             }
 
             return result;
