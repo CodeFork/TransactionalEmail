@@ -37,7 +37,12 @@ namespace TransactionalEmail.Controllers
         {
             Check.If(emailReference).IsNotNull();
 
-            return EmailFactory.CreateEmailModel(_emailService.GetEmail(emailReference));
+            var result = _emailService.GetEmail(emailReference);
+
+            if (result.IsNull())
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+
+            return EmailFactory.CreateEmailModel(result);
         }
 
         [HttpPost, Route("")]
