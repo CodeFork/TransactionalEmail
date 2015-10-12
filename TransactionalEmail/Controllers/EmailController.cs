@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Conditions;
 using Conditions.Guards;
+using Swashbuckle.Swagger.Annotations;
 using TransactionalEmail.Core.Interfaces;
 using TransactionalEmail.Factories;
 using TransactionalEmail.Models;
@@ -33,16 +34,16 @@ namespace TransactionalEmail.Controllers
         }
 
         [HttpGet, Route("{emailReference:length(1,10)}", Name = "GetEmail")]
-        public Email GetEmail(string emailReference)
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof (Email))]
+        public HttpResponseMessage GetEmail(string emailReference)
         {
             Check.If(emailReference).IsNotNull();
 
             var result = _emailService.GetEmail(emailReference);
 
-            if (result.IsNull())
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-
-            return EmailFactory.CreateEmailModel(result);
+            return result.IsNull()
+                ? Request.CreateResponse(HttpStatusCode.NotFound)
+                : Request.CreateResponse(EmailFactory.CreateEmailModel(result));
         }
 
         [HttpPost, Route("")]
