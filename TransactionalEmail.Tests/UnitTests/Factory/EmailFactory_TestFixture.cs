@@ -33,7 +33,7 @@ namespace TransactionalEmail.Tests.UnitTests.Factory
             //Arrange
             var email = new Email
             {
-                ToAddresses = "Kristian Wilson <kristian.wilson@gmail.com>",
+                ToAddresses = "Kristian Wilson <kristian.wilson@rgroup.co.uk>",
                 Subject = "Test Subject",
                 PlainTextBody = "Plain Text",
                 HtmlBody = "Html Body",
@@ -47,7 +47,7 @@ namespace TransactionalEmail.Tests.UnitTests.Factory
             result.EmailAddresses.Should().NotBeEmpty();
             result.EmailAddresses.Count().Should().Be(1);
             result.EmailAddresses.First().Name.Should().Be("Kristian Wilson");
-            result.EmailAddresses.First().Email.Should().Be("kristian.wilson@gmail.com");
+            result.EmailAddresses.First().Email.Should().Be("kristian.wilson@rgroup.co.uk");
             result.EmailAddresses.First().Type.Should().Be(EmailAddressType.To);  
             result.Subject.Should().Be(email.Subject);
             result.PlainTextBody.Should().Be(email.PlainTextBody);
@@ -58,6 +58,69 @@ namespace TransactionalEmail.Tests.UnitTests.Factory
             result.Attachments.First().MimeType.Should().Be("Test");
         }
 
+        [Test]
+        public void CreateCoreEmail_MultipleEmailAddress_Returns_Core_Email_With_CorrectNumberOfAddresses()
+        {
+            //Arrange
+            var email = new Email
+            {
+                ToAddresses = "Kristian Wilson <kristian.wilson@rgroup.co.uk>; Kristian Wilson <kristian.wilson@letme.com>",
+                Subject = "Test Subject",
+                PlainTextBody = "Plain Text",
+                HtmlBody = "Html Body",
+                Attachments = new List<Attachment> { new Attachment { AttachmentName = "Test", MimeType = "Test" } }
+            };
+
+            //Act
+            var result = EmailFactory.CreateCoreEmail(email);
+
+            //Assert
+            result.EmailAddresses.Should().NotBeEmpty();
+            result.EmailAddresses.Count().Should().Be(2);
+            result.EmailAddresses.First().Name.Should().Be("Kristian Wilson");
+            result.EmailAddresses.First().Email.Should().Be("kristian.wilson@rgroup.co.uk");
+            result.EmailAddresses[1].Name.Should().Be("Kristian Wilson");
+            result.EmailAddresses[1].Email.Should().Be("kristian.wilson@letme.com");
+            result.EmailAddresses.First().Type.Should().Be(EmailAddressType.To);
+            result.Subject.Should().Be(email.Subject);
+            result.PlainTextBody.Should().Be(email.PlainTextBody);
+            result.HtmlBody.Should().Be(email.HtmlBody);
+            result.Attachments.Should().NotBeEmpty();
+            result.Attachments.Count().Should().Be(1);
+            result.Attachments.First().AttachmentName.Should().Be("Test");
+            result.Attachments.First().MimeType.Should().Be("Test");
+        }
+
+        [Test]
+        public void CreateCoreEmail_SingleEmailAddressWithErrantSeperator_Returns_Core_Email_With_SingleEmailAddress()
+        {
+            //Arrange
+            var email = new Email
+            {
+                ToAddresses = "Kristian Wilson <kristian.wilson@rgroup.co.uk>;",
+                Subject = "Test Subject",
+                PlainTextBody = "Plain Text",
+                HtmlBody = "Html Body",
+                Attachments = new List<Attachment> { new Attachment { AttachmentName = "Test", MimeType = "Test" } }
+            };
+
+            //Act
+            var result = EmailFactory.CreateCoreEmail(email);
+
+            //Assert
+            result.EmailAddresses.Should().NotBeEmpty();
+            result.EmailAddresses.Count().Should().Be(1);
+            result.EmailAddresses.First().Name.Should().Be("Kristian Wilson");
+            result.EmailAddresses.First().Email.Should().Be("kristian.wilson@rgroup.co.uk");
+            result.EmailAddresses.First().Type.Should().Be(EmailAddressType.To);
+            result.Subject.Should().Be(email.Subject);
+            result.PlainTextBody.Should().Be(email.PlainTextBody);
+            result.HtmlBody.Should().Be(email.HtmlBody);
+            result.Attachments.Should().NotBeEmpty();
+            result.Attachments.Count().Should().Be(1);
+            result.Attachments.First().AttachmentName.Should().Be("Test");
+            result.Attachments.First().MimeType.Should().Be("Test");
+        }
 
         [Test, ExpectedException(typeof(ArgumentNullException))]
         public void CreateEmailModel_Null_Email_Throws_Exception()
