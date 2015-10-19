@@ -21,7 +21,7 @@ namespace TransactionalEmail.Extensions
             {
                 if (i > 0)
                 {
-                    builder.Append("; ");
+                    builder.Append("| ");
                 }
 
                 builder.AppendFormat(emailAddresses[i].ToAddressString());

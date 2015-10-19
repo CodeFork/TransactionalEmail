@@ -50,7 +50,7 @@ namespace TransactionalEmail.Tests.UnitTests.Extensions
             var result = emails.ToAddressString();
 
             //Assert
-            result.Should().Be("Kristian Wilson <kristian.wilson@gmail.com>; John Smith <john.smith@gmail.com>");
+            result.Should().Be("Kristian Wilson <kristian.wilson@gmail.com>| John Smith <john.smith@gmail.com>");
         }
     }
 }

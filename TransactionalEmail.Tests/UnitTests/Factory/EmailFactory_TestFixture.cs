@@ -64,7 +64,7 @@ namespace TransactionalEmail.Tests.UnitTests.Factory
             //Arrange
             var email = new Email
             {
-                ToAddresses = "Kristian Wilson <kristian.wilson@rgroup.co.uk>; Kristian Wilson <kristian.wilson@letme.com>",
+                ToAddresses = "Kristian Wilson <kristian.wilson@rgroup.co.uk>| Kristian Wilson <kristian.wilson@letme.com>",
                 Subject = "Test Subject",
                 PlainTextBody = "Plain Text",
                 HtmlBody = "Html Body",
@@ -97,7 +97,7 @@ namespace TransactionalEmail.Tests.UnitTests.Factory
             //Arrange
             var email = new Email
             {
-                ToAddresses = "Kristian Wilson <kristian.wilson@rgroup.co.uk>;",
+                ToAddresses = "Kristian Wilson <kristian.wilson@rgroup.co.uk>|",
                 Subject = "Test Subject",
                 PlainTextBody = "Plain Text",
                 HtmlBody = "Html Body",

@@ -12,7 +12,7 @@ namespace TransactionalEmail.Extensions
         {
             if (addressString.IsNotNullOrEmpty() && addressString.Contains('<') && addressString.Contains('>'))
             {
-                var addresses = addressString.Split(';');
+                var addresses = addressString.Split('|');
 
                 return
                     addresses.Where(address => address.IsNotNullOrEmpty())
