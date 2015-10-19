@@ -14,12 +14,15 @@ namespace TransactionalEmail.Extensions
             {
                 var addresses = addressString.Split(';');
 
-                return addresses.Select(address => address.Split('<')).Select(parts => new EmailAddress
-                {
-                    Name = parts[0].Trim(),
-                    Email = parts[1].TrimEnd('>').Trim(), //get rid of the trailing angle bracket
-                    Type = type,
-                }).ToList();
+                return
+                    addresses.Where(address => address.IsNotNullOrEmpty())
+                        .Select(address => address.Split('<'))
+                        .Select(parts => new EmailAddress
+                        {
+                            Name = parts[0].Trim(),
+                            Email = parts[1].TrimEnd('>').Trim(), //get rid of the trailing angle bracket
+                            Type = type,
+                        }).ToList();
             }
 
             return new List<EmailAddress>();
