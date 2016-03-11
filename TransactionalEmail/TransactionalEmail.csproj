@@ -178,6 +178,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\letme-transactionalemail - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\letme-transactionalemail - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\letme-transactionalemail.pubxml" />
     <Content Include="TransactionalEmail-f63f0ca729ee.pfx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -44,6 +44,7 @@ namespace TransactionalEmail.Core.Services
 
             foreach (var mailboxSettings in _mailboxConfiguration.Mailboxes.Where(x => !x.Outbound))
             {
+                
                 var emails = _emailProvider.GetEmails(mailboxSettings, numberOfEmailsToRetrieve);
 
                 foreach (var email in emails)

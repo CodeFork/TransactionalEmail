@@ -76,6 +76,7 @@
     <Compile Include="Rules\ForwardingRuleFactory.cs" />
     <Compile Include="Rules\MobileNumberInBodyRule.cs" />
     <Compile Include="Rules\MobileNumberInSubjectRule.cs" />
+    <Compile Include="Rules\SubjectContainsToEmailRule.cs" />
     <Compile Include="Rules\SubjectRule.cs" />
     <Compile Include="Services\ForwardService.cs" />
     <Compile Include="Services\EmailService.cs" />

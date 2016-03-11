@@ -12,9 +12,9 @@ namespace TransactionalEmail
     {
         public static void Register()
         {
-		    GlobalConfiguration.Configuration.Filters.Add(new RequireHttpsAttribute());
-			GlobalConfiguration.Configuration.Filters.Add(new IdentityBasicAuthenticationAttribute());
-			GlobalConfiguration.Configuration.Filters.Add(new AuthorizeAttribute());
+            GlobalConfiguration.Configuration.Filters.Add(new RequireHttpsAttribute());
+            GlobalConfiguration.Configuration.Filters.Add(new IdentityBasicAuthenticationAttribute());
+            GlobalConfiguration.Configuration.Filters.Add(new AuthorizeAttribute());
         }
     }
 }
