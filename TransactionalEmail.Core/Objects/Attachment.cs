@@ -4,7 +4,7 @@ namespace TransactionalEmail.Core.Objects
 {
     public class Attachment
     {
-        public string AttachmentId { get; set; }
+        public int AttachmentId { get; set; }
         public string AttachmentName { get; set; }
         public string MimeType { get; set; }
         public byte[] ByteArray { get; set; }
