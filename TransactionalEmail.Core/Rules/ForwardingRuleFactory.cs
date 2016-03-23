@@ -22,6 +22,7 @@ namespace TransactionalEmail.Core.Rules
                 new MobileNumberInSubjectRule(),
                 new MobileNumberInBodyRule(),
                 new SubjectRule(_emailAddressValidator),
+                new SubjectContainsToEmailRule(_emailAddressValidator)
             };
         }
     }
